@@ -13,7 +13,7 @@ app.use(bodyParser.json({ limit: '10mb' })); // Increase limit for base64 images
 app.use(express.static('public'));
 
 // Database connection
-mongoose.connect('mongodb://localhost:27017/ecommerce', {
+mongoose.connect('mongodb+srv://chennak238:kanna2006@cluster0.ov1wi6x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
