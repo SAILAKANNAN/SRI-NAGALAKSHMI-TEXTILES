@@ -1707,6 +1707,7 @@ app.get('/admin/edit-product/:id', async (req, res) => {
             <html>
             <head>
                 <title>Edit Product</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
                 <style>
@@ -1732,16 +1733,78 @@ app.get('/admin/edit-product/:id', async (req, res) => {
                     .form-section {
                         background-color: #f8f9fa;
                         border-radius: 5px;
-                        padding: 20px;
-                        margin-bottom: 20px;
+                        padding: 15px;
+                        margin-bottom: 15px;
+                    }
+                    /* Mobile-specific styles */
+                    @media (max-width: 768px) {
+                        .navbar-brand {
+                            font-size: 1rem;
+                        }
+                        .form-section {
+                            padding: 12px;
+                        }
+                        .product-image {
+                            max-width: 80px;
+                            max-height: 80px;
+                        }
+                        h2 {
+                            font-size: 1.5rem;
+                        }
+                        h4 {
+                            font-size: 1.2rem;
+                        }
+                        .btn {
+                            padding: 0.5rem 1rem;
+                            font-size: 0.9rem;
+                        }
+                        .container {
+                            padding-left: 10px;
+                            padding-right: 10px;
+                        }
+                    }
+                    @media (max-width: 576px) {
+                        .product-image {
+                            max-width: 60px;
+                            max-height: 60px;
+                        }
+                        .form-section {
+                            padding: 10px;
+                        }
+                        .col-md-6, .col-md-4, .col-md-12 {
+                            padding-left: 5px;
+                            padding-right: 5px;
+                        }
+                        .row.g-3 {
+                            margin-left: -5px;
+                            margin-right: -5px;
+                        }
+                        .row.g-3 > [class^="col-"] {
+                            padding-left: 5px;
+                            padding-right: 5px;
+                        }
+                        .form-control, .form-select {
+                            font-size: 0.9rem;
+                            padding: 0.375rem 0.5rem;
+                        }
+                        .btn {
+                            width: 100%;
+                            margin-bottom: 10px;
+                        }
+                        .d-md-flex {
+                            display: block !important;
+                        }
+                        .me-md-2 {
+                            margin-right: 0 !important;
+                        }
                     }
                 </style>
             </head>
             <body>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="/admin">MyShop Admin</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
@@ -1766,7 +1829,7 @@ app.get('/admin/edit-product/:id', async (req, res) => {
                 </nav>
                 
                 <div class="container">
-                    <div class="row mb-4">
+                    <div class="row mb-3">
                         <div class="col">
                             <h2>Edit Product</h2>
                         </div>
@@ -1775,7 +1838,7 @@ app.get('/admin/edit-product/:id', async (req, res) => {
                     <form id="productForm">
                         <div class="form-section">
                             <h4 class="mb-3">Basic Information</h4>
-                            <div class="row g-3">
+                            <div class="row g-2">
                                 <div class="col-md-6">
                                     <label class="form-label">Product Name</label>
                                     <input type="text" class="form-control" name="name" value="${product.name}" required>
@@ -1793,7 +1856,7 @@ app.get('/admin/edit-product/:id', async (req, res) => {
                         
                         <div class="form-section">
                             <h4 class="mb-3">Pricing</h4>
-                            <div class="row g-3">
+                            <div class="row g-2">
                                 <div class="col-md-4">
                                     <label class="form-label">Price</label>
                                     <input type="number" class="form-control" name="price" value="${product.price}" required>
@@ -1821,7 +1884,7 @@ app.get('/admin/edit-product/:id', async (req, res) => {
                         
                         <div class="form-section">
                             <h4 class="mb-3">Images</h4>
-                            <div class="row g-3">
+                            <div class="row g-2">
                                 <div class="col-md-6">
                                     <label class="form-label">Current Main Image</label>
                                     <div class="image-preview-container">
@@ -1832,7 +1895,7 @@ app.get('/admin/edit-product/:id', async (req, res) => {
                                 </div>
                             </div>
                             
-                            <div class="row g-3 mt-3">
+                            <div class="row g-2 mt-2">
                                 <div class="col-md-12">
                                     <label class="form-label">Current Additional Images</label>
                                     <div class="image-preview-container">
@@ -1844,9 +1907,9 @@ app.get('/admin/edit-product/:id', async (req, res) => {
                             </div>
                         </div>
                         
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                            <button type="button" class="btn btn-secondary me-md-2" onclick="window.location.href='/admin'">Cancel</button>
-                            <button type="button" class="btn btn-primary" onclick="updateProduct('${product._id}')">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                            <button type="button" class="btn btn-secondary me-md-2 mb-2" onclick="window.location.href='/admin'">Cancel</button>
+                            <button type="button" class="btn btn-primary mb-2" onclick="updateProduct('${product._id}')">
                                 <i class="bi bi-save"></i> Update Product
                             </button>
                         </div>
@@ -1943,6 +2006,7 @@ app.get('/product/:id', async (req, res) => {
             <html>
             <head>
                 <title>${product.name} | SRI NAGALAKSHMI TEXTILES</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
                 <style>
@@ -1958,15 +2022,23 @@ app.get('/product/:id', async (req, res) => {
                         border-radius: 0.25rem;
                     }
                     .product-thumbnail {
-                        width: 80px;
-                        height: 80px;
+                        width: 60px;
+                        height: 60px;
                         object-fit: cover;
                         border: 1px solid #dee2e6;
                         border-radius: 0.25rem;
-                        margin-right: 10px;
-                        margin-bottom: 10px;
+                        margin-right: 5px;
+                        margin-bottom: 5px;
                         cursor: pointer;
                         transition: all 0.3s ease;
+                    }
+                    @media (min-width: 768px) {
+                        .product-thumbnail {
+                            width: 80px;
+                            height: 80px;
+                            margin-right: 10px;
+                            margin-bottom: 10px;
+                        }
                     }
                     .product-thumbnail:hover {
                         border-color: #0d6efd;
@@ -1979,16 +2051,21 @@ app.get('/product/:id', async (req, res) => {
                         margin: 15px 0;
                     }
                     .current-price {
-                        font-size: 1.5rem;
+                        font-size: 1.25rem;
                         font-weight: bold;
                         color: #dc3545;
+                    }
+                    @media (min-width: 768px) {
+                        .current-price {
+                            font-size: 1.5rem;
+                        }
                     }
                     .original-price {
                         text-decoration: line-through;
                         color: #6c757d;
                     }
                     .discount-badge {
-                        font-size: 1rem;
+                        font-size: 0.9rem;
                         background-color: #dc3545;
                         color: white;
                     }
@@ -2001,13 +2078,22 @@ app.get('/product/:id', async (req, res) => {
                     }
                     .size-option label {
                         display: inline-block;
-                        padding: 8px 15px;
+                        padding: 8px 12px;
                         border: 1px solid #dee2e6;
                         border-radius: 0.25rem;
-                        margin-right: 10px;
-                        margin-bottom: 10px;
+                        margin-right: 8px;
+                        margin-bottom: 8px;
                         cursor: pointer;
                         transition: all 0.3s ease;
+                        min-width: 40px;
+                        text-align: center;
+                    }
+                    @media (min-width: 768px) {
+                        .size-option label {
+                            padding: 8px 15px;
+                            margin-right: 10px;
+                            margin-bottom: 10px;
+                        }
                     }
                     .size-option input[type="radio"]:checked + label {
                         border-color: #0d6efd;
@@ -2015,13 +2101,18 @@ app.get('/product/:id', async (req, res) => {
                         font-weight: bold;
                     }
                     .quantity-selector {
-                        width: 100px;
+                        width: 100%;
+                    }
+                    @media (min-width: 768px) {
+                        .quantity-selector {
+                            width: 100px;
+                        }
                     }
                     .footer {
                         background-color: #343a40;
                         color: white;
-                        padding: 40px 0;
-                        margin-top: 50px;
+                        padding: 30px 0;
+                        margin-top: 30px;
                     }
                     .footer a {
                         color: #adb5bd;
@@ -2032,28 +2123,66 @@ app.get('/product/:id', async (req, res) => {
                     }
                     .social-icons a {
                         color: white;
-                        font-size: 1.5rem;
-                        margin-right: 15px;
+                        font-size: 1.25rem;
+                        margin-right: 10px;
                     }
                     .nav-link {
                         font-weight: 500;
                     }
                     .whatsapp-float {
                         position: fixed;
-                        width: 60px;
-                        height: 60px;
-                        bottom: 40px;
-                        right: 40px;
+                        width: 50px;
+                        height: 50px;
+                        bottom: 20px;
+                        right: 20px;
                         background-color: #25d366;
                         color: #FFF;
                         border-radius: 50px;
                         text-align: center;
-                        font-size: 30px;
+                        font-size: 24px;
                         box-shadow: 2px 2px 3px #999;
                         z-index: 100;
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                    }
+                    @media (min-width: 768px) {
+                        .whatsapp-float {
+                            width: 60px;
+                            height: 60px;
+                            bottom: 40px;
+                            right: 40px;
+                            font-size: 30px;
+                        }
+                    }
+                    
+                    /* Mobile-specific styles */
+                    @media (max-width: 767px) {
+                        h1 {
+                            font-size: 1.75rem;
+                        }
+                        .price-section {
+                            padding: 10px;
+                        }
+                        .footer {
+                            padding: 20px 0;
+                            margin-top: 20px;
+                        }
+                        .footer .col-md-4 {
+                            margin-bottom: 20px;
+                        }
+                        .btn-lg {
+                            padding: 0.5rem 1rem;
+                            font-size: 1rem;
+                        }
+                        .navbar-brand {
+                            font-size: 1.1rem;
+                        }
+                    }
+                    
+                    /* Improved touch targets */
+                    .btn, .product-thumbnail, .size-option label {
+                        touch-action: manipulation;
                     }
                 </style>
             </head>
@@ -2064,7 +2193,7 @@ app.get('/product/:id', async (req, res) => {
                         <a class="navbar-brand" href="/">
                             <i class="bi bi-shop"></i> SRI NAGALAKSHMI
                         </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
@@ -2072,7 +2201,6 @@ app.get('/product/:id', async (req, res) => {
                                 <li class="nav-item">
                                     <a class="nav-link" href="/">Home</a>
                                 </li>
-                               
                                 <li class="nav-item">
                                     <a class="nav-link" href="/about">About Us</a>
                                 </li>
@@ -2086,18 +2214,17 @@ app.get('/product/:id', async (req, res) => {
                                         <i class="bi bi-person"></i> Login
                                     </a>
                                 </li>
-                             
                             </ul>
                         </div>
                     </div>
                 </nav>
 
                 <!-- Main Product Content -->
-                <div class="container my-5">
+                <div class="container my-3 my-md-5">
                     <div class="row">
                         <!-- Product Images -->
-                        <div class="col-md-6">
-                            <div class="mb-4">
+                        <div class="col-md-6 mb-4 mb-md-0">
+                            <div class="mb-3">
                                 <img src="${product.mainImage.data}" alt="${product.name}" class="product-image-main img-fluid" id="mainProductImage">
                             </div>
                             <div class="d-flex flex-wrap">
@@ -2112,10 +2239,10 @@ app.get('/product/:id', async (req, res) => {
                         
                         <!-- Product Details -->
                         <div class="col-md-6">
-                            <h1 class="mb-3">${product.name}</h1>
-                            <p class="text-muted mb-4">${product.category}</p>
+                            <h1 class="mb-2 mb-md-3">${product.name}</h1>
+                            <p class="text-muted mb-3 mb-md-4">${product.category}</p>
                             
-                            <div class="price-section mb-4">
+                            <div class="price-section mb-3 mb-md-4">
                                 <div class="d-flex align-items-center">
                                     <span class="current-price me-2">₹${product.price}</span>
                                     <span class="original-price me-2">₹${product.mrp}</span>
@@ -2124,19 +2251,19 @@ app.get('/product/:id', async (req, res) => {
                                 <small class="text-success">Inclusive of all taxes</small>
                             </div>
                             
-                            <div class="mb-4">
+                            <div class="mb-3 mb-md-4">
                                 <h3>Description</h3>
                                 <p class="text-muted">${product.description}</p>
                             </div>
                             
-                            <form id="buyForm" action="/checkout" method="POST" class="mb-5">
+                            <form id="buyForm" action="/checkout" method="POST" class="mb-4 mb-md-5">
                                 <input type="hidden" name="productId" value="${product._id}">
                                 <input type="hidden" name="productName" value="${product.name}">
                                 <input type="hidden" name="price" value="${product.price}">
                                 <input type="hidden" name="mrp" value="${product.mrp}">
                                 
-                                <div class="mb-4">
-                                    <h5 class="mb-3">Select Size</h5>
+                                <div class="mb-3 mb-md-4">
+                                    <h5 class="mb-2 mb-md-3">Select Size</h5>
                                     <div class="d-flex flex-wrap">
                                         ${product.size.map(s => `
                                             <div class="size-option">
@@ -2148,16 +2275,15 @@ app.get('/product/:id', async (req, res) => {
                                     <small class="text-muted">Select a size to proceed</small>
                                 </div>
                                 
-                                <div class="mb-4">
-                                    <h5 class="mb-3">Quantity</h5>
+                                <div class="mb-3 mb-md-4">
+                                    <h5 class="mb-2 mb-md-3">Quantity</h5>
                                     <input type="number" class="form-control quantity-selector" name="quantity" value="1" min="1" max="10">
                                 </div>
                                 
-                                <div class="d-grid gap-2 d-md-block">
-                                    <button type="submit" class="btn btn-danger btn-lg me-md-2">
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-danger btn-lg">
                                         <i class="bi bi-lightning-fill"></i> Buy Now
                                     </button>
-                                    
                                 </div>
                             </form>
                         </div>
@@ -2191,13 +2317,13 @@ app.get('/product/:id', async (req, res) => {
                                 <ul class="list-unstyled">
                                     <li><i class="bi bi-envelope"></i> chennak238@gmail.com</li>
                                     <li><i class="bi bi-telephone"></i> 63828 87930</li>
-                                    <li><i class="bi bi-geo-alt"></i>  4/327 Aasari Pattarai Street Government Boys, Hr. Sec.School Perumagoundampatti. Elampillai-637 502., TN</li>
+                                    <li><i class="bi bi-geo-alt"></i> 4/327 Aasari Pattarai Street Government Boys, Hr. Sec.School Perumagoundampatti. Elampillai-637 502., TN</li>
                                 </ul>
                             </div>
                         </div>
-                        <hr class="my-4 bg-secondary">
+                        <hr class="my-3 my-md-4 bg-secondary">
                         <div class="row">
-                            <div class="col-md-6 text-center text-md-start">
+                            <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
                                 <p class="mb-0">&copy; ${new Date().getFullYear()} SRI NAGALAKSHMI TEXTILES. All rights reserved.</p>
                             </div>
                             <div class="col-md-6 text-center text-md-end">
@@ -2208,7 +2334,7 @@ app.get('/product/:id', async (req, res) => {
                 </footer>
 
                 <!-- WhatsApp Float Button -->
-                <a href="https://wa.me/916382887930" class="whatsapp-float" target="_blank">
+                <a href="https://wa.me/916382887930" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
                     <i class="bi bi-whatsapp"></i>
                 </a>
 
@@ -2258,6 +2384,16 @@ app.get('/product/:id', async (req, res) => {
                         tooltipTriggerList.map(function (tooltipTriggerEl) {
                             return new bootstrap.Tooltip(tooltipTriggerEl);
                         });
+                        
+                        // Prevent zooming on double-tap for mobile
+                        let lastTouchEnd = 0;
+                        document.addEventListener('touchend', function(event) {
+                            const now = (new Date()).getTime();
+                            if (now - lastTouchEnd <= 300) {
+                                event.preventDefault();
+                            }
+                            lastTouchEnd = now;
+                        }, false);
                     });
                 </script>
             </body>
@@ -2267,7 +2403,6 @@ app.get('/product/:id', async (req, res) => {
         res.status(500).send('Error loading product');
     }
 });
-
 // Checkout Page
 app.post('/checkout', async (req, res) => {
     const { productId, productName, price, mrp, size, quantity } = req.body;
@@ -2282,6 +2417,7 @@ app.post('/checkout', async (req, res) => {
             <html>
             <head>
                 <title>Checkout | SRI NAGALAKSHMI TEXTILES</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
                 <style>
@@ -2292,21 +2428,23 @@ app.post('/checkout', async (req, res) => {
                     .checkout-container {
                         max-width: 1200px;
                         margin: 0 auto;
+                        padding: 0 15px;
                     }
                     .address-form {
                         background-color: #f8f9fa;
                         border-radius: 8px;
-                        padding: 25px;
+                        padding: 20px;
                     }
                     .order-summary {
                         background-color: #fff;
                         border-radius: 8px;
                         box-shadow: 0 0 15px rgba(0,0,0,0.1);
-                        padding: 25px;
+                        padding: 20px;
+                        margin-top: 20px;
                     }
                     .product-image-checkout {
-                        width: 80px;
-                        height: 80px;
+                        width: 70px;
+                        height: 70px;
                         object-fit: cover;
                         border-radius: 4px;
                     }
@@ -2336,29 +2474,72 @@ app.post('/checkout', async (req, res) => {
                     .footer {
                         background-color: #343a40;
                         color: white;
-                        padding: 40px 0;
-                        margin-top: 50px;
+                        padding: 30px 0;
+                        margin-top: 30px;
                     }
                     .whatsapp-float {
                         position: fixed;
-                        width: 60px;
-                        height: 60px;
-                        bottom: 40px;
-                        right: 40px;
+                        width: 50px;
+                        height: 50px;
+                        bottom: 20px;
+                        right: 20px;
                         background-color: #25d366;
                         color: #FFF;
                         border-radius: 50px;
                         text-align: center;
-                        font-size: 30px;
+                        font-size: 24px;
                         box-shadow: 2px 2px 3px #999;
                         z-index: 100;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                     }
-                    @media (max-width: 768px) {
+                    /* Mobile-specific styles */
+                    @media (max-width: 576px) {
                         .checkout-container {
-                            padding: 0 15px;
+                            padding: 0 10px;
+                        }
+                        .address-form, .order-summary {
+                            padding: 15px;
+                        }
+                        .product-image-checkout {
+                            width: 60px;
+                            height: 60px;
+                        }
+                        .btn-lg {
+                            padding: 0.5rem 1rem;
+                            font-size: 1rem;
+                        }
+                        .navbar-brand {
+                            font-size: 1rem;
+                        }
+                        .footer {
+                            padding: 20px 0;
+                            font-size: 0.9rem;
+                        }
+                        .whatsapp-float {
+                            width: 40px;
+                            height: 40px;
+                            font-size: 20px;
+                            bottom: 15px;
+                            right: 15px;
+                        }
+                    }
+                    @media (max-width: 768px) {
+                        .row.g-4 {
+                            gap: 15px !important;
+                        }
+                        .mb-3, .mb-4 {
+                            margin-bottom: 1rem !important;
+                        }
+                        h2 {
+                            font-size: 1.5rem;
+                        }
+                        h3 {
+                            font-size: 1.3rem;
+                        }
+                        h5 {
+                            font-size: 1.1rem;
                         }
                     }
                 </style>
@@ -2370,7 +2551,7 @@ app.post('/checkout', async (req, res) => {
                         <a class="navbar-brand" href="/">
                             <i class="bi bi-shop"></i> SRI NAGALAKSHMI TEXTILES
                         </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
@@ -2394,19 +2575,18 @@ app.post('/checkout', async (req, res) => {
                                         <i class="bi bi-person"></i> Login
                                     </a>
                                 </li>
-                               
                             </ul>
                         </div>
                     </div>
                 </nav>
 
                 <!-- Main Checkout Content -->
-                <div class="container py-5 checkout-container">
-                    <div class="row g-4">
+                <div class="container py-4 checkout-container">
+                    <div class="row g-3">
                         <!-- Delivery Address Form -->
                         <div class="col-lg-7">
                             <div class="address-form">
-                                <h2 class="mb-4"><i class="bi bi-truck"></i> Delivery Address</h2>
+                                <h2 class="mb-3"><i class="bi bi-truck"></i> Delivery Address</h2>
                                 <form action="/complete-order" method="POST">
                                     <input type="hidden" name="productId" value="${productId}">
                                     <input type="hidden" name="productName" value="${productName}">
@@ -2437,7 +2617,7 @@ app.post('/checkout', async (req, res) => {
                                             <input type="text" class="form-control" name="pincode" required>
                                         </div>
                                     </div>
-                                    <div class="row g-2 mb-4">
+                                    <div class="row g-2 mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label">District</label>
                                             <input type="text" class="form-control" name="district" required>
@@ -2458,7 +2638,7 @@ app.post('/checkout', async (req, res) => {
                                         </label>
                                     </div>
                                     
-                                    <button type="submit" class="btn btn-primary btn-lg w-100 mt-3">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100 mt-2">
                                         <i class="bi bi-check-circle"></i> Complete Order
                                     </button>
                                 </form>
@@ -2468,9 +2648,9 @@ app.post('/checkout', async (req, res) => {
                         <!-- Order Summary -->
                         <div class="col-lg-5">
                             <div class="order-summary">
-                                <h2 class="mb-4"><i class="bi bi-receipt"></i> Order Summary</h2>
+                                <h2 class="mb-3"><i class="bi bi-receipt"></i> Order Summary</h2>
                                 
-                                <div class="d-flex mb-4">
+                                <div class="d-flex mb-3">
                                     <img src="${product.mainImage.data}" alt="${productName}" class="product-image-checkout me-3">
                                     <div>
                                         <h5>${productName}</h5>
@@ -2498,7 +2678,7 @@ app.post('/checkout', async (req, res) => {
                                     <span class="total-amount">₹${price * (quantity || 1)}</span>
                                 </div>
                                 
-                                <div class="alert alert-success mt-4">
+                                <div class="alert alert-success mt-3">
                                     <i class="bi bi-check-circle"></i> Your order is eligible for FREE delivery
                                 </div>
                             </div>
@@ -2514,18 +2694,18 @@ app.post('/checkout', async (req, res) => {
                                 <h5>SRI NAGALAKSHMI TEXTILES</h5>
                                 <p>Your one-stop shop for quality textiles and clothing.</p>
                                 <div class="social-icons">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-twitter"></i></a>
+                                    <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+                                    <a href="#" class="text-white me-2"><i class="bi bi-instagram"></i></a>
+                                    <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-4 mb-md-0">
                                 <h5>Quick Links</h5>
                                 <ul class="list-unstyled">
-                                    <li><a href="/">Home</a></li>
-                                    <li><a href="/products">Products</a></li>
-                                    <li><a href="/about">About Us</a></li>
-                                    <li><a href="/contact">Contact</a></li>
+                                    <li><a href="/" class="text-white">Home</a></li>
+                                    <li><a href="/products" class="text-white">Products</a></li>
+                                    <li><a href="/about" class="text-white">About Us</a></li>
+                                    <li><a href="/contact" class="text-white">Contact</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-4">
@@ -2533,11 +2713,11 @@ app.post('/checkout', async (req, res) => {
                                 <ul class="list-unstyled">
                                     <li><i class="bi bi-envelope"></i> chennak238@gmail.com</li>
                                     <li><i class="bi bi-telephone"></i> 63828 87930</li>
-                                    <li><i class="bi bi-geo-alt"></i>  4/327 Aasari Pattarai Street Government Boys, Hr. Sec.School Perumagoundampatti. Elampillai-637 502., TN</li>
+                                    <li><i class="bi bi-geo-alt"></i> 4/327 Aasari Pattarai Street Government Boys, Hr. Sec.School Perumagoundampatti. Elampillai-637 502., TN</li>
                                 </ul>
                             </div>
                         </div>
-                        <hr class="my-4 bg-secondary">
+                        <hr class="my-3 bg-secondary">
                         <div class="row">
                             <div class="col-md-6 text-center text-md-start">
                                 <p class="mb-0">&copy; ${new Date().getFullYear()} SRI NAGALAKSHMI TEXTILES. All rights reserved.</p>
@@ -2550,7 +2730,7 @@ app.post('/checkout', async (req, res) => {
                 </footer>
 
                 <!-- WhatsApp Float Button -->
-                <a href="https://wa.me/916382887930" class="whatsapp-float" target="_blank">
+                <a href="https://wa.me/916382887930" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
                     <i class="bi bi-whatsapp"></i>
                 </a>
 
